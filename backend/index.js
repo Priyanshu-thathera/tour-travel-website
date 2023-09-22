@@ -14,7 +14,7 @@ dotenv.config()
 const app = express()
 
 const corsOptions = {
-  origin:true,
+  origin:'https://priyanshu-tour-service.netlify.app',
   credentials:true
 }
 
