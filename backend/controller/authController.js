@@ -65,13 +65,15 @@ export const login = async (req, res) => {
       const loginToken = jwt.sign(
         { email: user.email, role: user.role },
         process.env.JWT_SECRET_KEY
-        // { expiresIn: "15d" }
+        { expiresIn: "15d" }
       );
       // set token in the browser cookie and send the response to the client
       res
         .cookie("accessToken", loginToken, {
-          httpOnly: false,
-          // expires: loginToken.expresIn,
+          httpOnly: true,
+          maxAge: 3600000 * 5, // This sets the cookie to expire in 5 hours
+          secure: true, // Requires HTTPS to send the cookie
+          sameSite: 'none', // Allow cross-origin requests
         })
         .status(200)
         .json({
